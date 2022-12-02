@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.scit.member.dao.MemberMapper">
+	<select id="selectOne" parameterType="String"
+		resultType="MemberInfo">
+		SELECT
+		m.usrid, m.usrname, m.email, a.city, a.address
+		FROM
+		members m, addr a
+		WHERE
+		m.addrno = a.addrno
+		AND
+		usrid = #{usird}
+	</select>
+	<select id="selectAll" resultType="MemberInfo">
+		SELECT
+		m.usrid, m.usrname,
+		m.email, a.city, a.address
+		FROM
+		members m, addr a
+		WHERE
+		m.addrno =
+		a.addrno
+	</select>
+	<insert id="insertMember" parameterType="Members">
+		Insert INTO
+		members
+		VALUES(#{usrid}, #{usrname}, #{email}, #{addrno})
+	</insert>
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM members
+		WHERE usrid = #{usrid}
+	</delete>
+	<update id="updateMember"></update>
+</mapper>
